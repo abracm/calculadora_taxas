@@ -9,5 +9,6 @@ TODOs calculadora de taxas da WCA:
 - Incoporar taxa da ABRACM e da ABCM
 - Incorporar suporte para taxas do Stripe - mostrar valor total por competidor, valor total a ser pago
 - Colocar página em PTBR e ES - para compartilhar com amigos de toda a América Latina
+- Com base no total de taxas, sugerir valor de inscrição? Projeção de orçamento.
 
 Quem sabe no futuro ferramenta não pode virar maior - orçamento maker de competições?
