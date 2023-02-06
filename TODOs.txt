@@ -1,0 +1,11 @@
+TODOs calculadora de taxas da WCA:
+- Capturar dados de câmbio/taxas de conversão de moedas em tempo real
+- Incorporar suporte para moedas diferentes
+- Adicionar suporte para países diferentes ("bands" diferentes na WCA - nem todos usam fração de 0,45 cents de dólar)
+- Embelezar o site de maneira geral
+- Tornar página mais "responsiva" - melhorar a aparência no celular
+- Adicionar disclaimer sobre precisão de dados
+- Tentar oferecer dados mais precisos considerando valor pago de fato no dólar, IOF, etc
+- Incoporar taxa da ABRACM e da ABCM
+- Incorporar suporte para taxas do Stripe - mostrar valor total por competidor, valor total a ser pago
+- Colocar página em PTBR e ES - para compartilhar com amigos de toda a América Latina
