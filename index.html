@@ -10,7 +10,8 @@
         margin-top: 50px;
         text-align: center;
         font-size: 20px;
-        color: rgb(0, 2, 128);
+        color: rgb(0, 0, 0);
+        font-family: 'Courier New', Courier, monospace;
       }
 
       p {
@@ -18,11 +19,37 @@
         font-size: 25px;
       }
 
-      p.countdown {
-        font-weight: normal;
-        font-size: 25px;
+      img {
+        max-height: 100px;
       }
+
     </style>
   </head>
   <body>
+    <img src="https://i.imgur.com/WrFKnqk.png">
     <h1>Calculadora de Taxas da WCA</h1>
+
+    <div class="form-wrapper">
+      <input type="text" id="quantidadeCompetidores" name="quantidadeCompetidores" placeholder="Número de competidores">
+      <input type="text" id="valorInscricao" name="" placeholder="Valor da inscrição">
+      <button onClick="calcularTaxa()">Calcular taxa</button>
+      <p></p>
+    </div>
+
+    <p id="valorTaxa"></p>  
+
+    <script>
+      function calcularTaxa() {
+        var numeroCompetidores = document.getElementById("quantidadeCompetidores").value
+        var valorInscricao = document.getElementById("valorInscricao").value
+        if ((valorInscricao * 0.15) > 2.32) {
+          var valorIndividual = valorInscricao * 0.15
+        } else {
+          var valorIndividual = 2.32
+        }
+        document.getElementById("valorTaxa").innerHTML = (`As taxas da WCA serão de R$${valorIndividual} por competidor, 
+R$${numeroCompetidores * valorIndividual} total.`)
+      }
+    </script>
+
+  </body>
