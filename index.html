@@ -186,7 +186,7 @@
         orcamento += adicionaRow("Inscrições", valorInscricao, numeroCompetidores)
         orcamento += adicionaRow("Taxas", totalCompetidor, numeroCompetidores)
         orcamento += adicionaHeader("Líquido", "R$" + arredondaDinheiro(valorInscricao - totalCompetidor), 
-        "R$" + (arredondaDinheiro(valorInscricao - totalCompetidor) * numeroCompetidores))
+        "R$" + (arredondaDinheiro((valorInscricao - totalCompetidor) * numeroCompetidores)))
         return orcamento + `</table>`
       }
 
