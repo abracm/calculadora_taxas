@@ -76,14 +76,14 @@
   </head>
   <body>
     <img src="https://i.imgur.com/WrFKnqk.png">
-    <h1 style="font-size:5vw">Calculadora de Taxas de Competição</h1>
+    <h1 style="font-size:4vw">Calculadora de Taxas de Competição</h1>
 
     <div class="form-wrapper">
       <input type="text" id="quantidadeCompetidores" name="quantidadeCompetidores" placeholder="Número de competidores">
       <input type="text" id="valorInscricao" name="" placeholder="Valor da inscrição">
-      <p></p>
+      <div id="caixaDados"></div>
     </div>
-
+    <br>
     <label>
       <input type="checkbox" checked="true" onclick="htmlAluguel(this)" id="aluguel">
       Taxa de aluguel de equipamentos
@@ -113,13 +113,12 @@
       <input type="checkbox" id="stripe">
       <label for="stripe">Stripe para pagamento das inscrições</label> 
     </label>
-
     <p></p>
 
     <button onClick="calcularTaxa()">Calcular taxa</button>
 
     <p id="valorTaxa"></p>  
-
+    
     <script>
 
       function calcularWCA(valorInscricao) {
@@ -162,17 +161,52 @@
         return Math.round(dinheiro * 100) / 100
       }
 
+      function verificaInputs() {
+        if(!parseInt(document.getElementById("quantidadeCompetidores").value)) {
+          return false
+        }
+        if(!parseInt(document.getElementById("valorInscricao").value)) {
+          return false
+        }
+        return true
+      }
+
+      function adicionaHeader (h1, h2, h3){
+        return `
+          <tr>
+            <th>${h1}</th>
+            <th>${h2}</th>
+            <th>${h3}</th>
+          </tr>`
+      }
+
+      function adicionaOrcamento(numeroCompetidores, totalCompetidor, valorInscricao) {
+        orcamento = `<br><p style="font-size:small">Orçamento</p><table class="center">`
+        orcamento += adicionaHeader ("Descrição", "Por competidor", "Total")
+        orcamento += adicionaRow("Inscrições", valorInscricao, numeroCompetidores)
+        orcamento += adicionaRow("Taxas", totalCompetidor, numeroCompetidores)
+        orcamento += adicionaHeader("Líquido", "R$" + arredondaDinheiro(valorInscricao - totalCompetidor), 
+        "R$" + (arredondaDinheiro(valorInscricao - totalCompetidor) * numeroCompetidores))
+        return orcamento + `</table>`
+      }
+
       function calcularTaxa() {
+
+        if (!verificaInputs()) {
+          document.getElementById("caixaDados").innerHTML = `<p style="color: red;font-size: x-small;">Insira corretamente o número de competidores e valor da inscrição</p>`
+          document.getElementById("valorTaxa").innerHTML = ""
+          return
+        } else {
+          document.getElementById("caixaDados").innerHTML = ""
+        }
+
         var numeroCompetidores = document.getElementById("quantidadeCompetidores").value
         var valorInscricao = document.getElementById("valorInscricao").value
         
-        tabela = `<table class="center">
-          <tr>
-            <th>Taxa</th>
-            <th>Por Competidor</th>
-            <th>Total</th>
-          </tr>`
+        tabela = `<table class="center">`
         
+        tabela += adicionaHeader("Taxa", "Por Competidor", "Total")
+
         var valorWCA = calcularWCA(valorInscricao)
         tabela += adicionaRow("WCA", valorWCA, numeroCompetidores)
         var totalCompetidor = valorWCA
@@ -190,35 +224,33 @@
           totalCompetidor += valorStripe
         }
 
-        tabela+= `<tr>
-            <th>Total</th>
-            <th>R$${arredondaDinheiro(totalCompetidor)}</th>
-            <th>R$${arredondaDinheiro(totalCompetidor * numeroCompetidores)}</th>
-          </tr>`
+        tabela+= adicionaHeader("Total", "R$" + arredondaDinheiro(totalCompetidor), 
+        "R$" + (arredondaDinheiro(totalCompetidor * numeroCompetidores)))
         
         document.getElementById("valorTaxa").innerHTML = (tabela + "</table>")
+        document.getElementById("valorTaxa").innerHTML += adicionaOrcamento(numeroCompetidores, totalCompetidor, valorInscricao)
       }
 
       function htmlAluguel(opcaoAluguel) {
         if(opcaoAluguel.checked == true) {
           document.getElementById("associacoesEquipamentos").innerHTML = `
-          <label>
-        <input type="radio" name="choice-radio" checked="true">
-        ABRACM
-      </label>
-      <label>
-        <input type="radio" name="choice-radio">
-        ABCM
-      </label>
-      <br>
-      <label for="diasCompeticoes">Número de dias de competição:
-        <select name="diasCompeticoes" id="diasCompeticoes">
-          <option value="1">1</option>
-          <option value="2" selected>2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-        </select>
-      </label>
+        <label>
+          <input type="radio" name="choice-radio" checked="true" id="abracm">
+          ABRACM
+        </label>
+        <label>
+          <input type="radio" name="choice-radio" id="abcm">
+          ABCM
+        </label>
+        <br>
+        <label for="diasCompeticoes">Número de dias de competição:
+          <select name="diasCompeticoes" id="diasCompeticoes">
+            <option value="1">1</option>
+            <option value="2" selected>2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        </label>
           `
         } 
         if (opcaoAluguel.checked == false) {
