@@ -84,30 +84,15 @@
       <div id="caixaDados"></div>
     </div>
     <br>
-    <label>
-      <input type="checkbox" checked="true" onclick="htmlAluguel(this)" id="aluguel">
-      Taxa de aluguel de equipamentos
-    </label>
 
-    <div class="caixa" name="associacoesEquipamentos" id="associacoesEquipamentos">
-        <label>
-          <input type="radio" name="choice-radio" checked="true" id="abracm">
-          ABRACM
-        </label>
-        <label>
-          <input type="radio" name="choice-radio" id="abcm">
-          ABCM
-        </label>
-        <br>
-        <label for="diasCompeticoes">Número de dias de competição:
-          <select name="diasCompeticoes" id="diasCompeticoes">
-            <option value="1">1</option>
-            <option value="2" selected>2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-          </select>
-        </label>
-    </div>
+    <label for="diasCompeticoes">Número de dias de competição:
+      <select name="diasCompeticoes" id="diasCompeticoes">
+        <option value="1">1</option>
+        <option value="2" selected>2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+    </label>
     <br>
     <label>
       <input type="checkbox" id="stripe">
@@ -122,25 +107,18 @@
     <script>
 
       function calcularWCA(valorInscricao) {
-        if ((valorInscricao * 0.15) > 2.32) {
-          var valorWCA = valorInscricao * 0.15
+        if ((valorInscricao * 0.15) > 2.27) {
+          var valorWCA = valorInscricao * 0.15 * 1.0538
         } else {
-          var valorWCA = 2.32
+          var valorWCA = 2.27 * 1.0538
         }
         return valorWCA
       }
 
       function calcularAluguel() {
-        if (document.getElementById("abracm").checked) {
-            var associacao = "ABRACM"
-            var valorAssociacao = "2"
-          }
-          if (document.getElementById("abcm").checked) {
-            var associacao = "ABCM"
-            var valorAssociacao = "1"
-          }
+        var valorAssociacao = "2"
         var diasCompeticao = document.getElementById("diasCompeticoes").value
-        return [valorAssociacao * diasCompeticao, associacao]
+        return valorAssociacao * diasCompeticao
       }
 
       function calcularStripe(valorInscricao) {
@@ -165,7 +143,7 @@
         if(!parseInt(document.getElementById("quantidadeCompetidores").value)) {
           return false
         }
-        if(!parseInt(document.getElementById("valorInscricao").value)) {
+        if(!parseInt(document.getElementById("valorInscricao").value) && document.getElementById("valorInscricao").value != 0) {
           return false
         }
         return true
@@ -211,12 +189,9 @@
         tabela += adicionaRow("WCA", valorWCA, numeroCompetidores)
         var totalCompetidor = valorWCA
 
-        if (document.getElementById("aluguel").checked) {
-          var valorAluguelCompetidor = calcularAluguel()[0]
-          var associacao = calcularAluguel()[1]
-          tabela += adicionaRow(associacao, valorAluguelCompetidor, numeroCompetidores)
-          totalCompetidor += valorAluguelCompetidor
-        }
+        var valorAluguelCompetidor = calcularAluguel()
+        tabela += adicionaRow("ABRACM", valorAluguelCompetidor, numeroCompetidores)
+        totalCompetidor += valorAluguelCompetidor
         
         if (document.getElementById("stripe").checked) {
           var valorStripe = calcularStripe(valorInscricao)
@@ -230,33 +205,6 @@
         document.getElementById("valorTaxa").innerHTML = (tabela + "</table>")
         document.getElementById("valorTaxa").innerHTML += adicionaOrcamento(numeroCompetidores, totalCompetidor, valorInscricao)
       }
-
-      function htmlAluguel(opcaoAluguel) {
-        if(opcaoAluguel.checked == true) {
-          document.getElementById("associacoesEquipamentos").innerHTML = `
-        <label>
-          <input type="radio" name="choice-radio" checked="true" id="abracm">
-          ABRACM
-        </label>
-        <label>
-          <input type="radio" name="choice-radio" id="abcm">
-          ABCM
-        </label>
-        <br>
-        <label for="diasCompeticoes">Número de dias de competição:
-          <select name="diasCompeticoes" id="diasCompeticoes">
-            <option value="1">1</option>
-            <option value="2" selected>2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-          </select>
-        </label>
-          `
-        } 
-        if (opcaoAluguel.checked == false) {
-          document.getElementById("associacoesEquipamentos").innerHTML = ``
-        }
-      } 
     </script>
 
   </body>
