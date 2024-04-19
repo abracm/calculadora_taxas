@@ -6,14 +6,9 @@ TODOs calculadora de taxas da WCA:
 - Tornar página mais "responsiva" - melhorar a aparência no celular
 - Adicionar disclaimer sobre precisão de dados
 - Tentar oferecer dados mais precisos considerando valor pago de fato no dólar, IOF, etc
-- Incoporar taxa da ABRACM e da ABCM
-- Incorporar suporte para taxas do Stripe - mostrar valor total por competidor, valor total a ser pago
 - Colocar página em PTBR e ES - para compartilhar com amigos de toda a América Latina
 - Com base no total de taxas, sugerir valor de inscrição? Projeção de orçamento.
-- Adicionar tabela resumo sobre expectativa de faturamento ao final da página.
-- Adicionar caixinha cinza em volta de campos do taxa de aluguel - deixar claro que uma coisa está ligada a outra.
 - Adicionar infos ao passar o mouse em cima de taxas (hover) - explicação sobre o que é a taxa e como calculá-la.
 - Adicionar check box para Campeonato Mundial/Continental ou Competição de FMC em múltiplas cidades - isenta de taxa da WCA
-- Permitir que valor da inscrição seja zero (para mostrar taxas para sem nada)
 
 Quem sabe no futuro ferramenta não pode virar maior - orçamento maker de competições?
