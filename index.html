@@ -108,10 +108,11 @@
 
       function calcularWCA(valorInscricao) {
         if ((valorInscricao * 0.15) > 2.78) {
-          <!-- 2.78 is an estimation of US$0.45 (the minimum WCA due amount for Brazil)
-            in BRL as of 3 January 2025 -->
+          /*2.78 is an estimation of US$0.45 (the minimum WCA due amount for Brazil)
+            in BRL as of 3 January 2025*/
           var valorWCA = valorInscricao * 0.15 * 1.0338
-          <!-- 3.38% represent the amount of the IOF tax, which will be gradually phased out until 2028 -->
+          /* <!-- 3.38% represent the amount of the IOF tax,
+            which will be gradually phased out until 2028*/
         } else {
           var valorWCA = 2.78 * 1.0338
         }
