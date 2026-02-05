@@ -95,13 +95,6 @@
     </label>
     <br>
 
-    <label for="anoCompeticao">Ano da competição:
-      <select name="anoCompeticao" id="anoCompeticao">
-        <option value="2025" selected>2025</option>
-        <option value="2026">2026</option>
-      </select>
-    </label>
-    <br>
     <label>
       <input type="checkbox" id="stripe">
       <label for="stripe">Stripe para pagamento das inscrições</label> 
@@ -115,22 +108,12 @@
     <script>
 
       function calcularWCA(valorInscricao) {
-        
-        var anoCompeticao = document.getElementById("anoCompeticao").value
-        
-        if (anoCompeticao == 2025) {
-          var WCAporcentagem = 0.15
-          var WCAminimo = 2.44
-        }
-
-        if (anoCompeticao == 2026) {
-          var WCAporcentagem = 0.05
-          var WCAminimo = 2.71
-        }
+                
+        var WCAporcentagem = 0.05
+        var WCAminimo = 2.62
 
         /* WCAporcentagem and WCAminimo are set by the WCA
-        In 2025, the WCA changed the dues amounts that will apply from 2026
-        WCAminimo is an estimation of the USD amounts in BRL as of 27 August 2025*/
+        WCAminimo is an estimation of the USD amounts in BRL as of 5 February 2026*/
 
         if ((valorInscricao * WCAporcentagem) > WCAminimo) {
           var valorWCA = valorInscricao * WCAporcentagem * 1.035
